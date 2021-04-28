@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://bullet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Bullet.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.84464
+height = 11.2891
+
+[node name="Gun" type="RigidBody2D"]
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.662163 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 13.6821, -7.67532 )
+scale = Vector2( 0.172562, 0.198107 )
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Gun_body_entered"]

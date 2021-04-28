@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://scripts/char_movement.gd" type="Script" id=2]
+[ext_resource path="res://images.jpeg" type="Texture" id=3]
+[ext_resource path="res://kisspng-vida-financeira-gold-coin-computer-icons-gold-ornament-5aad0b262d4ee3.5002982415212900221856.png" type="Texture" id=4]
+[ext_resource path="res://scripts/CoinStrategy.gd" type="Script" id=5]
+[ext_resource path="res://Background.jpg" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.1886, 28.6273 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 192, 96, 0, 96, 0, 0, 192, 0 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "images.jpeg 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 32, 0, 192, 96 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 14.8667
+
+[node name="World" type="Node2D"]
+position = Vector2( 186, 147 )
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Player" type="KinematicBody2D" parent="Player"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 2 )
+
+[node name="icon" type="Sprite" parent="Player/Player"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player"]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Player/Player"]
+current = true
+
+[node name="Floor" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Floor"]
+position = Vector2( 193, 184 )
+tile_set = SubResource( 3 )
+format = 1
+tile_data = PoolIntArray( -65533, 0, 0, 2, 0, 0, 65537, 0, 0, 196602, 0, 0, 196605, 0, 0, 131072, 0, 0, 262136, 0, 0, 393204, 0, 0, 393213, 0, 0, 327680, 0, 0, 327683, 0, 0, 327686, 0, 0, 327689, 0, 0, 327692, 0, 0, 458741, 0, 0, 458744, 0, 0, 458746, 0, 0 )
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="coin" type="Area2D" parent="Coins"]
+position = Vector2( 525.5, 73.5 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 5 )
+
+[node name="kisspng-vida-financeira-gold-coin-computer-icons-gold-ornament-5aad0b262d4ee35002982415212900221856" type="Sprite" parent="Coins/coin"]
+position = Vector2( 0.114746, 0.848389 )
+scale = Vector2( 0.0352745, 0.0356743 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coins/coin"]
+position = Vector2( 0.489319, -0.114586 )
+shape = SubResource( 4 )
+
+[node name="Counter" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="Counter"]
+
+[node name="Control" type="Control" parent="Counter/HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Counter/HUD/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+text = "0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="Counter/HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CHAR_POSITION" type="RichTextLabel" parent="Counter/HUD/Control2"]
+margin_top = 12.0
+margin_right = 130.0
+margin_bottom = 28.0
+text = "CHAR_POSITION="
+
+[node name="Control3" type="Control" parent="Counter/HUD"]
+margin_left = 0.943871
+margin_top = 24.5407
+margin_right = 40.9439
+margin_bottom = 64.5407
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BULLET_POSITION" type="RichTextLabel" parent="Counter/HUD/Control3"]
+margin_right = 137.0
+margin_bottom = 15.0
+text = "BULLET_POSITION="
+
+[node name="Fondo" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo"]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Fondo/ParallaxLayer"]
+position = Vector2( 319.41, 141.324 )
+scale = Vector2( 1.52819, 1.91921 )
+texture = ExtResource( 6 )
+
+[connection signal="body_entered" from="Coins/coin" to="Coins/coin" method="_on_coin_body_entered"]
+[connection signal="body_entered" from="Coins/coin" to="Player/Player" method="_on_coin_body_entered"]
