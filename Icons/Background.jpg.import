@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kisspng-vida-financeira-gold-coin-computer-icons-gold-ornament-5aad0b262d4ee3.5002982415212900221856.png-127b3568c696cfcbd3f304e7dd9be4d1.stex"
+path="res://.import/Background.jpg-a532ad6c580c7c7db5d93b3c7c0a96c6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kisspng-vida-financeira-gold-coin-computer-icons-gold-ornament-5aad0b262d4ee3.5002982415212900221856.png"
-dest_files=[ "res://.import/kisspng-vida-financeira-gold-coin-computer-icons-gold-ornament-5aad0b262d4ee3.5002982415212900221856.png-127b3568c696cfcbd3f304e7dd9be4d1.stex" ]
+source_file="res://Icons/Background.jpg"
+dest_files=[ "res://.import/Background.jpg-a532ad6c580c7c7db5d93b3c7c0a96c6.stex" ]
 
 [params]
 

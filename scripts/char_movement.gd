@@ -1,12 +1,13 @@
 extends KinematicBody2D
-const GRAVITY = 500.0
+const GRAVITY = 350.0
 const WALK_SPEED = 300
 const JUMP_VELOCITY = 250
 const MAX_COINS = 100
 const SHOOT_SPEED = 500
 const ROF = 1.5
 const SHOOT_RANGE = 3
-var gun = preload("res://GunScene.tscn")
+var damage = 25
+var gun = preload("res://Scenes/GunScene.tscn")
 var gun_pos = Vector2()
 var coins = 0
 var velocity = Vector2()
@@ -59,7 +60,7 @@ func shootprocess():
 func shoot():
 	can_shoot=false
 	var BulletBody = gun.instance()
-	BulletBody.initialize(direcVector,SHOOT_SPEED,SHOOT_RANGE,gun_pos)
+	BulletBody.initialize(direcVector,SHOOT_SPEED,SHOOT_RANGE,gun_pos,damage)
 	get_tree().get_root().add_child(BulletBody)
 	var BULLET_POSITIONLBL = get_parent().get_parent().get_node("Counter/HUD/Control3/BULLET_POSITION")
 	BULLET_POSITIONLBL.text= "bp= " + str(int(BulletBody.position.x)) + " , " +str(int(BulletBody.position.y)) 
