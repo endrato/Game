@@ -52,6 +52,7 @@ func shootprocess():
 		shooting = true
 	if (shooting and can_shoot):
 		shoot()
+		yield(get_tree().create_timer(0.1),"timeout")
 		shooting = false
 		direcVector.x=0
 		direcVector.y=0	
@@ -61,16 +62,16 @@ func shoot():
 	can_shoot=false
 	var BulletBody = gun.instance()
 	BulletBody.initialize(direcVector,SHOOT_SPEED,SHOOT_RANGE,gun_pos,damage)
-	get_tree().get_root().add_child(BulletBody)
-	var BULLET_POSITIONLBL = get_parent().get_parent().get_node("Counter/HUD/Control3/BULLET_POSITION")
+	get_parent().add_child(BulletBody)
+	var BULLET_POSITIONLBL = get_parent().get_node("Counter/HUD/Control3/BULLET_POSITION")
 	BULLET_POSITIONLBL.text= "bp= " + str(int(BulletBody.position.x)) + " , " +str(int(BulletBody.position.y)) 
 	yield(get_tree().create_timer(ROF),"timeout")
 	can_shoot=true
 	
 func _process(delta):
-	var LabelNode = get_parent().get_parent().get_node("Counter/HUD/Control/RichTextLabel")
+	var LabelNode = get_parent().get_node("Counter/HUD/Control/RichTextLabel")
 	LabelNode.text = str(coins)
-	var CHAR_POSITIONLBL = get_parent().get_parent().get_node("Counter/HUD/Control2/CHAR_POSITION")
+	var CHAR_POSITIONLBL = get_parent().get_node("Counter/HUD/Control2/CHAR_POSITION")
 	CHAR_POSITIONLBL.text= "cp= " + str(int(position.x)) + " , " + str(int(position.y))
 	shootprocess()
 	

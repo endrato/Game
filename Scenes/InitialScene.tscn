@@ -8,9 +8,6 @@
 [ext_resource path="res://Icons/images.jpeg" type="Texture" id=6]
 [ext_resource path="res://scripts/char_movement.gd" type="Script" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.1886, 28.6273 )
-
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 192, 96, 0, 96, 0, 0, 192, 0 )
 
@@ -40,30 +37,18 @@ points = PoolVector2Array( 192, 96, 0, 96, 0, 0, 192, 0 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 14.8667
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.1886, 28.6273 )
+
 [node name="World" type="Node2D"]
 position = Vector2( 607, 55 )
-
-[node name="Player" type="Node" parent="."]
-
-[node name="Player" type="KinematicBody2D" parent="Player"]
-collision_layer = 2
-collision_mask = 13
-script = ExtResource( 7 )
-
-[node name="icon" type="Sprite" parent="Player/Player"]
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player"]
-shape = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="Player/Player"]
-current = true
 
 [node name="Floor" type="Node" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Floor"]
 position = Vector2( 193, 184 )
 tile_set = SubResource( 3 )
+collision_mask = 15
 format = 1
 tile_data = PoolIntArray( -589838, -1610612736, 0, -655345, -1610612736, 0, -524302, -1610612736, 0, -589809, -1610612736, 0, -393230, -1610612736, 0, -458737, -1610612736, 0, -327694, -1610612736, 0, -393201, -1610612736, 0, -262158, -1610612736, 0, -327665, -1610612736, 0, -196622, -1610612736, 0, -262129, -1610612736, 0, -196593, -1610612736, 0, -65550, -1610612736, 0, -131057, -1610612736, 0, -65533, 0, 0, -65521, -1610612736, 0, 65522, -1610612736, 0, 2, 0, 0, 65537, 0, 0, 65551, -1610612736, 0, 196594, -1610612736, 0, 196602, 0, 0, 196605, 0, 0, 131072, 0, 0, 131087, -1610612736, 0, 262130, -1610612736, 0, 262136, 0, 0, 327667, -1610612736, 0, 262159, -1610612736, 0, 393204, -1610612736, 0, 393213, 0, 0, 327680, 0, 0, 327683, 0, 0, 327686, 0, 0, 327689, 0, 0, 327692, 0, 0, 458741, 0, 0, 458744, 0, 0, 458746, 0, 0 )
 
@@ -134,7 +119,6 @@ text = "BULLET_POSITION="
 [node name="Fondo" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Fondo"]
-visible = false
 
 [node name="Sprite" type="Sprite" parent="Fondo/ParallaxLayer"]
 position = Vector2( 319.41, 141.324 )
@@ -142,6 +126,22 @@ scale = Vector2( 1.52819, 1.91921 )
 texture = ExtResource( 3 )
 
 [node name="Enemy#1" parent="." instance=ExtResource( 2 )]
+position = Vector2( -760.17, 174.906 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( -607, -55 )
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 7 )
+
+[node name="icon" type="Sprite" parent="Player"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
 
 [connection signal="body_entered" from="Coins/coin" to="Coins/coin" method="_on_coin_body_entered"]
-[connection signal="body_entered" from="Coins/coin" to="Player/Player" method="_on_coin_body_entered"]
+[connection signal="body_entered" from="Coins/coin" to="Player" method="_on_coin_body_entered"]
